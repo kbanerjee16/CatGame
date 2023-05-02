@@ -1,11 +1,11 @@
 import edu.princeton.cs.algs4.Edge;
 
-public class CatEdge extends Edge.java {
+public class CatEdge extends Edge {
     private double weight;
     
     public CatEdge(int v, int w) {
-        weight = 1;
         super(v, w, 1);
+        weight = 1;
     }
 
     @Override
