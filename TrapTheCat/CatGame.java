@@ -20,6 +20,37 @@ public class CatGame {
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
                 int v = (row*n + col);
+                if (row == 0) {
+                    board.addEdge(new CatEdge(v, freedom));
+                } else {
+                    if (col+1 != n) {
+                        board.addEdge(new CatEdge(v, (v-n)));
+                    }
+                    if (col != 0) {
+                        board.addEdge(new CatEdge(v, (v-n-1)));
+                    }
+                }
+
+                if (row+1 == n) {
+                    board.addEdge(new CatEdge(v, freedom));
+                } else {
+                    if (col != 0) {
+                        board.addEdge(new CatEdge(v, (v+n-1)));
+                    }
+                    if (col+1 != n) {
+                        board.addEdge(new CatEdge(v, (v+n)));
+                    }
+                }
+
+                if (col == 0) {
+                    board.addEdge(new CatEdge(v, freedom));
+                } else {
+                    
+                }
+
+
+
+                }
                 if (col != 0) {
                     board.addEdge(new CatEdge(v, v-1));
                     if (row != 0) {
