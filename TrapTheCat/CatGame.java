@@ -27,10 +27,19 @@ public class CatGame {
                     board.addEdge(new CatEdge(v, freedom));
                 } else {
                     if (col+1 < n) {
-                        board.addEdge(new CatEdge(v, (v-n+1)));
+                        if (row%2 > 0) {
+                            board.addEdge(new CatEdge(v, (v-n+1)));
+                        } else {
+                            board.addEdge(new CatEdge(v, (v-n)));
+                            if (col > 0) {
+                                board.addEdge(new CatEdge(v, (v-n-1)));
+                            }
+                        }
                     }
                     if (col > 0) {
-                        board.addEdge(new CatEdge(v, (v-n)));
+                        if (row%2 > 0) {
+                            board.addEdge(new CatEdge(v, (v-n)));
+                        }
                     }
                 }
 
@@ -38,10 +47,19 @@ public class CatGame {
                     board.addEdge(new CatEdge(v, freedom));
                 } else {
                     if (col > 0) {
-                        board.addEdge(new CatEdge(v, (v+n)));
+                        if (row%2 > 0) {
+                            board.addEdge(new CatEdge(v, (v+n)));
+                        } else {
+                            board.addEdge(new CatEdge(v, (v+n-1)));
+                            if (col+1 < n) {
+                                board.addEdge(new CatEdge(v, (v+n)));
+                            }
+                        }
                     }
                     if (col+1 < n) {
-                        board.addEdge(new CatEdge(v, (v+n+1)));
+                        if (row%2 > 0) {
+                            board.addEdge(new CatEdge(v, (v+n+1)));
+                        }
                     }
                 }
 
@@ -49,24 +67,12 @@ public class CatGame {
                     board.addEdge(new CatEdge(v, freedom));
                 } else {
                     board.addEdge(new CatEdge(v, (v-1)));
-                    //if (row > 0) {
-                      //  board.addEdge(new CatEdge(v, (v-n-1)));
-                    //}
-                    //if (row+1 < n) {
-                      //  board.addEdge(new CatEdge(v, (v+n-1)));
-                    //}
                 }
 
                 if (col+1 >= n) {
                     board.addEdge(new CatEdge(v, freedom));
                 } else {
                     board.addEdge(new CatEdge(v, (v+1)));
-                  //  if (row > 0) {
-                    //    board.addEdge(new CatEdge(v, (v-n)));
-                    //}
-                    //if (row+1 < n) {
-                      //  board.addEdge(new CatEdge(v, (v+n)));
-                    //}
                 }
             }
         }
