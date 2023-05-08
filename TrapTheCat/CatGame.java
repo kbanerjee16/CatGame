@@ -76,6 +76,17 @@ public class CatGame {
                 }
             }
         }
+
+        for (int i = 0; i < n*n*0.1; i++) {
+            int marked = (int) (Math.random()*(n*n));
+            if (marked != (n*(n/2) + (n/2))) {
+                for (Edge e : board.adj(marked)) {
+                 CatEdge ce = (CatEdge) e;
+                    ce.setWeight(infinity);
+                }
+                markedBoard[marked/n][marked%n] = true;
+            }
+        }
     }
 
     void markTile(int row, int col) {
@@ -88,10 +99,14 @@ public class CatGame {
 
         int catVertex = catPos[0]*boardSize + catPos[1];
         DijkstraUndirectedSP sp = new DijkstraUndirectedSP(board, catVertex);
-        CatEdge nextEdge = (CatEdge) sp.pathTo(freedom).iterator().next();
-        int nextVertex = nextEdge.other(catVertex);
-        catPos[0] = nextVertex / boardSize; //row
-        catPos[1] = nextVertex % boardSize; //col
+        if (!catIsTrapped()) {
+            CatEdge nextEdge = (CatEdge) sp.pathTo(freedom).iterator().next();
+            int nextVertex = nextEdge.other(catVertex);
+            catPos[0] = nextVertex / boardSize; //row
+            catPos[1] = nextVertex % boardSize; //col
+        } else {
+            catIsTrapped();
+        }
     }
 
     boolean marked(int row, int col) {
